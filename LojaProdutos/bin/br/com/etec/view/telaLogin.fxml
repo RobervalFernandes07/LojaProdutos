@@ -5,14 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: green;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.com.etec.model.Operacoes">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.etec.model.Operacoes">
    <children>
       <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
          <children>
-            <TextField layoutX="31.0" layoutY="36.0" prefHeight="36.0" prefWidth="377.0" text="dfsdfs" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
-            <PasswordField layoutX="31.0" layoutY="95.0" prefHeight="36.0" prefWidth="377.0" text="dfsdf" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0" />
-            <Button layoutX="32.0" layoutY="329.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="384.0" text="LOGIN" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
+            <TextField fx:id="txfUsuario" layoutX="31.0" layoutY="36.0" prefHeight="36.0" prefWidth="377.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0" />
+            <PasswordField fx:id="psfUsuario" layoutX="31.0" layoutY="95.0" prefHeight="36.0" prefWidth="377.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="100.0" />
+            <Button fx:id="btnAcessar" layoutX="32.0" layoutY="329.0" mnemonicParsing="false" onAction="#acessarConta" prefHeight="24.0" prefWidth="384.0" text="LOGIN" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="300.0" />
          </children>
       </AnchorPane>
    </children>
