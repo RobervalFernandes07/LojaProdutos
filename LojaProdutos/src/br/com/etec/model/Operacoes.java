@@ -32,7 +32,7 @@ public class Operacoes {
 			
 		}// if 
 		else {
-			mostrarMensagem(Alert.AlertType.WARNING,"Faltando dados","Informar a senha.");
+			mostrarMensagem(Alert.AlertType.WARNING,"Faltando dados","Informar a senha."); 
 		}
 	}// acessarConta
 	
