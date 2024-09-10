@@ -1,11 +1,17 @@
 package br.com.etec.model; // Pacote onde a classe está localizada
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javafx.event.ActionEvent; // Importa a classe para tratar eventos de ação
 import javafx.fxml.FXML; // Importa a anotação FXML para associar elementos da interface
 import javafx.scene.control.Alert; // Importa a classe para criar mensagens de alerta
 import javafx.scene.control.Button; // Importa a classe para criar botões
 import javafx.scene.control.PasswordField; // Importa a classe para campos de senha
 import javafx.scene.control.TextField; // Importa a classe para campos de texto
+import javafx.stage.Stage;
 
 public class Operacoes { // Classe que controla a lógica da interface gráfica
 
@@ -17,6 +23,12 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
 
     @FXML
     private Button btnAcessar; // Botão para acionar o login
+    
+    @FXML 
+    private Button btnFechar; // Botão para Fechar
+    
+    @FXML
+    private Stage acpPalco;
 
     @FXML
     private void acessarConta(ActionEvent event) { // Método chamado quando o botão é clicado
@@ -61,6 +73,42 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
         alerta.setHeaderText(null); // Remove o cabeçalho do alerta
         alerta.setContentText(mensagem); // Define a mensagem a ser exibida
         alerta.showAndWait(); // Exibe o alerta e espera o usuário interagir com ele
+    }
+    
+    @FXML 
+    private void fecharTelaLogin(ActionEvent event) {
+    	acpPalco = (Stage) btnFechar.getScene().getWindow();
+    	acpPalco.close();
+    }
+    
+    private boolean verificarUsuarioSenha(String usuario, String senha) throws SQLException {
+        Connection conexao = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        boolean usuarioValido = false;
+
+        try {
+            conexao = Conexao.conectar();
+            String sql = "SELECT * FROM tabelalogin WHERE usuario = ? AND senha = ?";
+            stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, usuario);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                usuarioValido = true;
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+            Conexao.fechar(conexao);
+        }
+
+        return usuarioValido;
     }
 }
 
