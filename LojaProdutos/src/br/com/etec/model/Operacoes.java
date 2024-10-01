@@ -53,6 +53,8 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
                 if(senhaUsuario.isEmpty()) {
                     mostrarMensagem(Alert.AlertType.WARNING, 
                             "FALTANDO DADOS", "INFORMAR A SENHA"); // Exibe uma mensagem de alerta
+                    txfUsuario.clear();
+                    psfUsuario.clear();
                 }
             }
         } else { // Se ambos os campos estiverem preenchidos
