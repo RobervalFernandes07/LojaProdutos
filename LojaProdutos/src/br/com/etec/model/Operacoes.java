@@ -1,5 +1,7 @@
 package br.com.etec.model; // Pacote onde a classe está localizada
 
+
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,7 +33,7 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
     private Stage acpPalco;
 
     @FXML
-    private void acessarConta(ActionEvent event) { // Método chamado quando o botão é clicado
+    private void acessarConta(ActionEvent event) throws SQLException { // Método chamado quando o botão é clicado
         
         // Obtém o texto inserido pelo usuário no campo de nome
         String nomeUsuario = txfUsuario.getText();
@@ -55,7 +57,7 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
             }
         } else { // Se ambos os campos estiverem preenchidos
             // Verifica se o nome de usuário e senha estão corretos
-            if(nomeUsuario.equals("admin") && senhaUsuario.equals("123456")) {
+            if(verificarUsuarioSenha(nomeUsuario,senhaUsuario)) {
                 mostrarMensagem(Alert.AlertType.CONFIRMATION, 
                         "ACESSO PERMITIDO", "Logado no sistema."); // Exibe uma mensagem de confirmação
             } else {
@@ -89,7 +91,7 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
 
         try {
             conexao = Conexao.conectar();
-            String sql = "SELECT * FROM tabelalogin WHERE usuario = ? AND senha = ?";
+            String sql = "SELECT * FROM login_tb WHERE usuario = ? AND senha = ?";
             stmt = conexao.prepareStatement(sql);
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
