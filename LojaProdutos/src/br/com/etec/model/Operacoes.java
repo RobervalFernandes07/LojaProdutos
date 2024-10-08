@@ -9,11 +9,15 @@ import java.sql.SQLException;
 
 import javafx.event.ActionEvent; // Importa a classe para tratar eventos de ação
 import javafx.fxml.FXML; // Importa a anotação FXML para associar elementos da interface
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert; // Importa a classe para criar mensagens de alerta
 import javafx.scene.control.Button; // Importa a classe para criar botões
 import javafx.scene.control.PasswordField; // Importa a classe para campos de senha
 import javafx.scene.control.TextField; // Importa a classe para campos de texto
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Operacoes { // Classe que controla a lógica da interface gráfica
 
@@ -114,5 +118,19 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
 
         return usuarioValido;
     }
+    
+    	public void  acessarTelaPrincipal(ActionEvent event) {
+    		
+    			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaLogin.fxml"));
+    			Scene scene = new Scene(root);
+    			scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
+    			primaryStage.setScene(scene);
+    			
+    			primaryStage.initStyle(StageStyle.UNDECORATED);
+    			
+    			primaryStage.show();
+    			
+    	
+    	}
 }
 
