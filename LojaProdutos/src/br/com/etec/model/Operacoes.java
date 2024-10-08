@@ -2,6 +2,7 @@ package br.com.etec.model; // Pacote onde a classe está localizada
 
 
 
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +40,8 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
     
     @FXML
     private Stage acpPalco;
+    
+    
 
     @FXML
     private void acessarConta(ActionEvent event) throws SQLException, IOException { // Método chamado quando o botão é clicado
@@ -124,23 +127,24 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
         return usuarioValido;
     }
     
-    	public void  acessarTelaPrincipal(ActionEvent event) throws IOException {
-    		
-    			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/TelaPrincipal.fxml"));
-    			
-    			primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    			
-    			Scene scene = new Scene(root);
-    			scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
-    			primaryStage.setScene(scene);
-    			
-    			primaryStage.initStyle(StageStyle.UNDECORATED);
-    			
-    			primaryStage.setMaximized(true);
-    			
-    			primaryStage.show();
-    			
-    	
-    	}
+    private void acessarTelaPrincipal(ActionEvent event) throws IOException {
+        try {
+            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/br/com/etec/view/TelaPrincipal.fxml"));
+            
+            primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
+            primaryStage.setScene(scene);
+            primaryStage.initStyle(StageStyle.UNDECORATED);
+            primaryStage.setMaximized(true);
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Adicione isto para ver o erro no console
+            mostrarMensagem(Alert.AlertType.ERROR, "ERRO", "Não foi possível carregar a tela principal.");
+        }
+    }
+
+
 }
 
