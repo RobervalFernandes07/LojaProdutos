@@ -2,6 +2,7 @@ package br.com.etec.model; // Pacote onde a classe está localizada
 
 
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.sql.SQLException;
 import javafx.event.ActionEvent; // Importa a classe para tratar eventos de ação
 import javafx.fxml.FXML; // Importa a anotação FXML para associar elementos da interface
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert; // Importa a classe para criar mensagens de alerta
 import javafx.scene.control.Button; // Importa a classe para criar botões
@@ -20,7 +22,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Operacoes { // Classe que controla a lógica da interface gráfica
-
+	 @FXML
+	 private Stage primaryStage;
+	
     @FXML
     private TextField txfUsuario; // Campo de texto para o nome de usuário
 
@@ -37,7 +41,7 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
     private Stage acpPalco;
 
     @FXML
-    private void acessarConta(ActionEvent event) throws SQLException { // Método chamado quando o botão é clicado
+    private void acessarConta(ActionEvent event) throws SQLException, IOException { // Método chamado quando o botão é clicado
         
         // Obtém o texto inserido pelo usuário no campo de nome
         String nomeUsuario = txfUsuario.getText();
@@ -65,7 +69,8 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
             // Verifica se o nome de usuário e senha estão corretos
             if(verificarUsuarioSenha(nomeUsuario,senhaUsuario)) {
                 mostrarMensagem(Alert.AlertType.CONFIRMATION, 
-                        "ACESSO PERMITIDO", "Logado no sistema."); // Exibe uma mensagem de confirmação
+                        "ACESSO PERMITIDO", "Logado no sistema.");// Exibe uma mensagem de confirmação
+                acessarTelaPrincipal(event);
             } else {
                 mostrarMensagem(Alert.AlertType.ERROR, 
                         "ERRO DE ACESSO", "Usuário ou senha errada."); // Exibe uma mensagem de erro
@@ -119,14 +124,19 @@ public class Operacoes { // Classe que controla a lógica da interface gráfica
         return usuarioValido;
     }
     
-    	public void  acessarTelaPrincipal(ActionEvent event) {
+    	public void  acessarTelaPrincipal(ActionEvent event) throws IOException {
     		
-    			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/telaLogin.fxml"));
+    			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/br/com/etec/view/TelaPrincipal.fxml"));
+    			
+    			primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    			
     			Scene scene = new Scene(root);
     			scene.getStylesheets().add(getClass().getResource("/br/com/etec/view/application.css").toExternalForm());
     			primaryStage.setScene(scene);
     			
     			primaryStage.initStyle(StageStyle.UNDECORATED);
+    			
+    			primaryStage.setMaximized(true);
     			
     			primaryStage.show();
     			
